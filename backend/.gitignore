@@ -1,0 +1,4 @@
+backend/venv/
+backend/data/raw/
+.env.local
+*.joblib
