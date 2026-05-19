@@ -1,26 +1,112 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Mono:ital,wght@0,300;0,400;1,300&family=Instrument+Serif:ital@0;1&display=swap');
 
+/* ── Tokens ───────────────────────────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:           #080c12;
+  --surface:      rgba(10, 15, 22, 0.72);
+  --surface-hover:rgba(14, 20, 30, 0.85);
+  --border:       rgba(255, 255, 255, 0.07);
+  --border-light: rgba(255, 255, 255, 0.12);
+
+  --text-primary:   #e8edf5;
+  --text-secondary: #7a8599;
+  --text-muted:     #3d4a5c;
+
+  /* anomaly color scale */
+  --cold-3:  #1d4ed8;
+  --cold-2:  #3b82f6;
+  --cold-1:  #93c5fd;
+  --neutral: #334155;
+  --warm-1:  #fbbf24;
+  --warm-2:  #f97316;
+  --warm-3:  #ef4444;
+  --warm-4:  #991b1b;
+
+  --accent:  #3b82f6;
+  --flag:    #ef4444;
+  --flag-bg: rgba(239, 68, 68, 0.1);
+
+  --font-display: 'Syne', sans-serif;
+  --font-mono:    'DM Mono', monospace;
+  --font-serif:   'Instrument Serif', serif;
+
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+
+  --blur: blur(16px) saturate(1.4);
+  --shadow: 0 4px 32px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.04) inset;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* ── Reset ────────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* ── Leaflet overrides ────────────────────────────────────────────────────── */
+.leaflet-container {
+  background: #080c12 !important;
+  font-family: var(--font-display) !important;
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.leaflet-tile-pane { filter: brightness(0.55) saturate(0.4) hue-rotate(200deg); }
+
+.leaflet-control-zoom {
+  display: none !important;
 }
+
+.leaflet-control-attribution {
+  background: transparent !important;
+  color: var(--text-muted) !important;
+  font-family: var(--font-mono) !important;
+  font-size: 9px !important;
+  backdrop-filter: none !important;
+}
+
+/* ── Anomaly popup ────────────────────────────────────────────────────────── */
+.leaflet-popup-content-wrapper {
+  background: var(--surface) !important;
+  backdrop-filter: var(--blur) !important;
+  border: 1px solid var(--border-light) !important;
+  border-radius: var(--radius-md) !important;
+  box-shadow: var(--shadow) !important;
+  padding: 0 !important;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  font-family: var(--font-display) !important;
+}
+
+.leaflet-popup-tip-container { display: none !important; }
+
+/* ── Scrollbar ────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 2px; }
+
+/* ── Utility animations ───────────────────────────────────────────────────── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-ring {
+  0%   { transform: scale(1);   opacity: 0.8; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+.fade-in { animation: fadeIn 0.4s ease both; }
