@@ -1,0 +1,17 @@
+# Data
+backend/data/
+
+# File types
+*.nc
+*.pkl
+
+# Python
+__pycache__/
+.ipynb_checkpoints/
+
+# System
+.DS_Store
+
+# Credentials
+_netrc
+.netrc
