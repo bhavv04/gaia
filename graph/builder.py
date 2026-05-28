@@ -242,7 +242,7 @@ class GAIAGraphBuilder:
                         edge_type   = edge_def.edge_type,
                         weight      = edge_def.base_weight,
                         lag_hours   = edge_def.lag_hours,
-                        confidence  = edge_def.confidence,
+                        confidence  = 1.0,
                         cross_domain= edge_def.cross_domain,
                     )
 

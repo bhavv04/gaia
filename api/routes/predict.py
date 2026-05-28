@@ -32,7 +32,8 @@ from data.ingestion.noaa import fetch_all_noaa_nodes
 from data.ingestion.openaq import fetch_all_openaq_nodes
 from graph.builder import GAIAGraphBuilder
 from graph.schema import NODE_DOMAIN
-from model.gnn import NODE_FEAT_DIM, NUM_DOMAINS, NUM_NODE_TYPES, NodeType
+from model.gnn import NODE_FEAT_DIM, NUM_DOMAINS, NUM_NODE_TYPES
+from graph.schema import NodeType
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
