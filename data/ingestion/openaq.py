@@ -16,7 +16,7 @@ Data source:
 import logging
 from datetime import datetime, timedelta, timezone
 from typing import Optional
-
+import os
 import requests
 
 from graph.schema import EcoNode, NodeType
@@ -24,6 +24,7 @@ from graph.schema import EcoNode, NodeType
 logger  = logging.getLogger(__name__)
 BASE    = "https://api.openaq.org/v3"
 TIMEOUT = 30
+OPENAQ_API_KEY = os.getenv("OPENAQ_API_KEY", "")
 
 # WHO annual guideline limits (μg/m³) used as normalisation ceiling
 WHO_LIMITS = {
@@ -76,7 +77,7 @@ def _find_location_id(lat: float, lon: float, radius_m: int = 25000) -> Optional
         "order_by":    "distance",
     }
     try:
-        resp = requests.get(url, params=params, timeout=TIMEOUT)
+        resp = requests.get(url, params=params, timeout=TIMEOUT, headers={"X-API-Key": OPENAQ_API_KEY})
         resp.raise_for_status()
         results = resp.json().get("results", [])
         if results:

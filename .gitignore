@@ -15,3 +15,8 @@ __pycache__/
 # Credentials
 _netrc
 .netrc
+
+# Exclude all environment configuration files
+.env
+.env.local
+.env.*.local

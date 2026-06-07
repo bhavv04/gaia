@@ -34,7 +34,7 @@ interface CascadeStep {
   node_cascade_probs: Record<string, GLfloat>;
 }
 
-interface CascadeResponse {
+interface CascadeResponse { 
   region: string;
   snapshot_id: string;
   nodes: NodeState[];
